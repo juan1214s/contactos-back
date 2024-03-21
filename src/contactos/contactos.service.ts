@@ -14,13 +14,18 @@ export class ContactosService {
         @InjectRepository(Usuario) private usuariosRepository: Repository<Usuario>
         ){}
 
+    async contactos(){
+        return this.contactosRepository.find()
+    }
+
     async crearContactos(id: number, contacto: ContactoDto) {
         try {
             
             const usuarioExiste = await this.usuariosRepository.findOne({
                 where: {
                     id
-                }
+                },
+                relations: ['contactos']
             })
 
             if (!usuarioExiste) {
@@ -32,12 +37,18 @@ export class ContactosService {
                 throw new Error('El nombre del contacto no puede ser indefinido o nulo');
             }
     
-            const contactoNuevo = this.contactosRepository.create(contacto);
-            return await this.contactosRepository.save(contactoNuevo);
+            const nuevoContacto = new Contactos();
+            nuevoContacto.nombre = contacto.nombre;
+            nuevoContacto.numero = contacto.numero;
+            nuevoContacto.correoElectronico = contacto.correoElectronico
+            nuevoContacto.usuario = usuarioExiste;
+
+
+            return await this.contactosRepository.save(nuevoContacto);
         } catch (error) {
             throw new Error(`Error al intentar crear el contacto: ${error.message}`);
         }
-    }
+    };
 
     async actualizarContacto(id: number, contacto: ContactoDto) {
         try {
@@ -57,5 +68,16 @@ export class ContactosService {
         } catch (error) {
             throw new Error(`Error al intentar actualizar el contacto: ${error.message}`);
         }
-    }
+    };
+
+    async eliminarContacto(id: number){
+      const existeContacto = await this.contactosRepository.delete({id});
+
+      if (existeContacto.affected === 0) {
+        throw new HttpException('El contacto que intentas eliminar no existe', HttpStatus.NOT_FOUND);
+      }
+
+      return existeContacto;
+    };
+
 }

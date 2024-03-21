@@ -17,7 +17,7 @@ export class Usuario{
     correoElectronico: string;
 
     @Column({type: 'varchar', length: 80})
-    contrasena: string
+    password: string
 
     @OneToMany( () => Contactos, contacto => contacto.usuario)
     contactos: Contactos[];
