@@ -4,6 +4,7 @@ import { Usuario } from './entiy/usuario.entity';
 import { Repository } from 'typeorm';
 import { UsuarioDto } from './Dto/types.usuarios';
 import * as nodemailer from 'nodemailer';
+import * as bcrypt from "bcrypt"
 
 @Injectable()
 export class UsuariosService {
@@ -34,24 +35,31 @@ export class UsuariosService {
             throw new HttpException('El correo ya está registrado', HttpStatus.CONFLICT);
         }
 
-        const usuarioNuevo = this.usuarioRepository.create(usuario);
-        await this.usuarioRepository.save(usuarioNuevo);
-
-        // Envío de correo electrónico de confirmación
         try {
+            const saltRounds = 5; 
+            const hashedPassword = await bcrypt.hash(usuario.password, saltRounds);
+
+            const nuevoUsuario = new Usuario()
+            nuevoUsuario.nombre = usuario.nombre;
+            nuevoUsuario.apellido = usuario.apellido;
+            nuevoUsuario.correoElectronico = usuario.correoElectronico;
+            nuevoUsuario.password = hashedPassword;
+
+            await this.usuarioRepository.save(nuevoUsuario);
+
             const mailOptions = {
                 from: '',
-                to: usuarioNuevo.correoElectronico,
+                to: nuevoUsuario.correoElectronico,
                 subject: 'Confirmación de registro',
                 text: '¡Gracias por registrarte en nuestra aplicación!',
             };
 
             await this.transporter.sendMail(mailOptions);
-        } catch (error) {
-            throw new Error(`Error al enviar el correo electrónico de confirmación: ${error.message}`);
-        }
 
-        return usuarioNuevo;
+            return { mensaje: 'Usuario creado con exito!'};
+        } catch (error) {
+            throw new Error(`Error al crear el usuario: ${error.message}`);
+        }
     }
 
     async eliminarUsuario(id: number) {

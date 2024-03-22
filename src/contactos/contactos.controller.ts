@@ -16,9 +16,9 @@ export class ContactosController {
         return this.contactosService.actualizarContacto(id, contacto)
     }
 
-    @Get()
-    contactos(){
-        return this.contactosService.contactos();
+    @Get(':usuarioId')
+    contactos(@Param('usuarioId', ParseIntPipe) id: number){
+        return this.contactosService.contactos(id);
     }
 
     @Delete(':id')

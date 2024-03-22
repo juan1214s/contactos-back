@@ -14,8 +14,15 @@ export class ContactosService {
         @InjectRepository(Usuario) private usuariosRepository: Repository<Usuario>
         ){}
 
-    async contactos(){
-        return this.contactosRepository.find()
+    async contactos(id: number){
+        const usuarioContactos = await this.usuariosRepository.findOne({
+            where: {
+                id
+            },
+            relations: ['contactos']
+        })
+
+        return usuarioContactos.contactos;
     }
 
     async crearContactos(id: number, contacto: ContactoDto) {
