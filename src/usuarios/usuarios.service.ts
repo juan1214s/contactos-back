@@ -11,7 +11,7 @@ export class UsuariosService {
     private transporter;
 
     constructor(
-        @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>,
+        @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>
     ) {
         // Configuración del transporter de Nodemailer
         this.transporter = nodemailer.createTransport({

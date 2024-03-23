@@ -10,6 +10,8 @@ import { BuscadorModule } from './buscador/buscador.module';
 import { Contactos } from './contactos/entity/contactos.entity';
 import { LoginModule } from './login/login.module';
 
+
+
 dotenv.config();
 
 @Module({

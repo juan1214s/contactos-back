@@ -8,3 +8,12 @@ export class LoginDto{
     @IsString()
     password: string
 }
+
+export class Tokens{
+    @IsString()
+    access_token: string
+
+    @IsString()
+    refresh_token: string
+
+}
