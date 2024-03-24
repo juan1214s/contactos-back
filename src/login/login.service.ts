@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import * as dotenv from "dotenv";
-import { Tokens } from './Dto/login.type';
+
 
 dotenv.config();
 
@@ -54,7 +54,7 @@ export class LoginService {
     //esto firma el token
     const accessToken = await this.jwtService.signAsync(payload, {
         secret: process.env.JWT_TOKEN,//es la clave privada
-        expiresIn: '1d' //es la duracion del token
+        expiresIn: '1h' //es la duracion del token
     });
         
     const refreshToken = await this.jwtService.signAsync(payload, {
@@ -63,8 +63,10 @@ export class LoginService {
     });
 
     return {
+        //devuelve los dos token
         access_token: accessToken,
         refresh_token: refreshToken,
+        idUsuario: usuario.id,
         message: 'Token generado exitosamente'
         };
     } catch (error) {
