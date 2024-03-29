@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
 import { ContactosService } from './contactos.service';
 import { ContactoDto } from './Dto/types.contactos';
-
 import { ApiBearerAuth } from "@nestjs/swagger"
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guards';
 
@@ -13,7 +12,6 @@ export class ContactosController {
 
     constructor(private contactosService: ContactosService){}
 
-    
     @Post(':usuarioId')
     async crearContactos(@Param('usuarioId', ParseIntPipe) id: number, @Body() contacto: ContactoDto) {
         return this.contactosService.crearContactos(id, contacto);

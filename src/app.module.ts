@@ -10,6 +10,7 @@ import { BuscadorModule } from './buscador/buscador.module';
 import { Contactos } from './contactos/entity/contactos.entity';
 import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
+import { RecuperarPasswordModule } from './recuperar-password/recuperar-password.module';
 
 
 
@@ -31,6 +32,7 @@ dotenv.config();
     BuscadorModule,
     LoginModule,
     AuthModule,
+    RecuperarPasswordModule,
   ],
   controllers: [AppController],
   providers: [AppService],
