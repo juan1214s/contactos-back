@@ -3,12 +3,24 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const availablePorts = [3000, 4000, 3500];
-  //puede ser un numero o undefined
   let selectedPort: number | undefined;
 
   for (const port of availablePorts) {
     try {
       const app = await NestFactory.create(AppModule, { logger: false });
+
+      // Configurar CORS globalmente
+      app.enableCors({
+        origin: ['http://localhost:4200',
+         'http://localhost:4200/login',
+         'http://localhost:4200/usuario'
+        
+        ], // Permitir solicitudes desde estos orígenes
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Permitir estos métodos HTTP
+        allowedHeaders: 'Content-Type,Authorization', // Permitir estas cabeceras en las solicitudes
+        credentials: true, // Permitir enviar cookies de autenticación
+      });
+
       await app.listen(port);
       selectedPort = port;
       break;

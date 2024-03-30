@@ -11,14 +11,14 @@ export class Usuario{
     nombre: string;
 
     @Column({type: 'varchar', length: 80})
-    apellido: string
+    apellido: string;
 
     @Column({type: 'varchar', length: 80})
     correoElectronico: string;
 
     @Column({type: 'varchar', length: 80})
-    password: string
+    password: string;
 
-    @OneToMany( () => Contactos, contacto => contacto.usuario)
+    @OneToMany( () => Contactos, contacto => contacto.usuario, { cascade: true })
     contactos: Contactos[];
 }
