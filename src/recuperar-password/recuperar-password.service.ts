@@ -51,6 +51,7 @@ export class RecuperarPasswordService {
             };
 
             await this.transporter.sendMail(mailOptions);
+            return {messaje : 'Se ha enviado la contraseña al correo registrado'}
         } catch (error) {
             throw new HttpException('Error en el servidor', HttpStatus.INTERNAL_SERVER_ERROR);
         }
