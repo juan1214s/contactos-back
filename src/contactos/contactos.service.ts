@@ -77,14 +77,12 @@ export class ContactosService {
         }
     };
 
-    async eliminarContacto(id: number){
+    async eliminarContacto(id: number): Promise<void>{
       const existeContacto = await this.contactosRepository.delete({id});
 
       if (existeContacto.affected === 0) {
         throw new HttpException('El contacto que intentas eliminar no existe', HttpStatus.NOT_FOUND);
       }
-
-      return existeContacto;
     };
 
 }

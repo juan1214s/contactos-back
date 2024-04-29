@@ -11,7 +11,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         super({
             //desestructura el token 
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            ignoreExpiration: false,//perimite q el token almacenado caduque
+            ignoreExpiration: true,//perimite q el token almacenado caduque
             secretOrKey: process.env.JWT_TOKEN
         });
     }

@@ -11,7 +11,7 @@ export class Contactos{
     @Column({type: 'varchar', length: 80})
     nombre: string
 
-    @Column({type: 'varchar', length: 80})
+    @Column('integer')
     numero: number
 
     @Column({type: 'varchar', length: 80})
@@ -19,4 +19,5 @@ export class Contactos{
 
     @ManyToOne(() => Usuario, usuario => usuario.contactos)
     usuario: Usuario
+    
 }

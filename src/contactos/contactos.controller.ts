@@ -31,8 +31,8 @@ export class ContactosController {
 
     
     @Delete(':id')
-    eliminarContacto(@Param('id', ParseIntPipe) id: number){
-        return this.contactosService.eliminarContacto(id)
+    eliminarContacto(@Param('id', ParseIntPipe) id: number): Promise<void>{
+        return this.contactosService.eliminarContacto(+id)
     }
 
 

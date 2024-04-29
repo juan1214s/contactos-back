@@ -7,11 +7,10 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guards';
 @Controller('buscador')
 export class BuscadorController {
 
-    constructor(private BuscadorService: BuscadorService){}
+    constructor(private buscadorService: BuscadorService){}
 
     @Get(':id')
-    buscador(@Param('id', ParseIntPipe) id: number , @Body('nombre') nombre: string){
-        return this.BuscadorService.buscarContacto(id, nombre);
+    async buscador(@Param('id', ParseIntPipe) id: number, @Query('nombre') nombre: string) {
+      return this.buscadorService.buscarContacto(id, nombre);
     }
-
 }
