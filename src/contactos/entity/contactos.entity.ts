@@ -11,7 +11,7 @@ export class Contactos{
     @Column({type: 'varchar', length: 80})
     nombre: string
 
-    @Column('integer')
+    @Column({type: 'varchar', length: 20})
     numero: number
 
     @Column({type: 'varchar', length: 80})

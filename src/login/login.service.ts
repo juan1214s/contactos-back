@@ -54,7 +54,7 @@ export class LoginService {
     //esto firma el token
     const accessToken = await this.jwtService.signAsync(payload, {
         secret: process.env.JWT_TOKEN,//es la clave privada
-        expiresIn: '1m' //es la duracion del token
+        expiresIn: '40m' //es la duracion del token
     });
         
     const refreshToken = await this.jwtService.signAsync(payload, {
