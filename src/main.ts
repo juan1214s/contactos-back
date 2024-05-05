@@ -12,6 +12,7 @@ async function bootstrap() {
       // Configurar CORS globalmente
       app.enableCors({
         origin: ['http://localhost:4200',
+        'http://192.168.1.16:4200',
          'http://localhost:4200/login',
          'http://localhost:4200/usuario'
         
