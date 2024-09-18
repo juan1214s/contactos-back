@@ -89,9 +89,5 @@ Se permiten las siguientes cabeceras:
 
 Se permite el envío de cookies de autenticación.
 
-## Contribución
-
-Si deseas contribuir a este proyecto, por favor abre un **issue** o envía un **pull request** con tus cambios.
-
 
 
