@@ -7,7 +7,7 @@ async function bootstrap() {
 
   for (const port of availablePorts) {
     try {
-      const app = await NestFactory.create(AppModule, { logger: false });
+      const app = await NestFactory.create(AppModule, { logger: ['error', 'warn', 'log', 'verbose', 'debug'] });
 
       // Configurar CORS globalmente
       app.enableCors({
