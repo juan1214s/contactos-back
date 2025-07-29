@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const availablePorts = [3000, 4000, 3500];
+  const availablePorts = [3200, 4000, 3500];
   let selectedPort: number | undefined;
 
   for (const port of availablePorts) {

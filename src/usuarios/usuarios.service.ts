@@ -19,7 +19,7 @@ export class UsuariosService {
             service: 'Gmail',
             auth: {
                 user: 'alzatejuan1980@gmail.com',
-                pass: 'zdntlhytdwfqhaue',
+                pass: 'kkhwtfzuwbyflans',
             },
         });
     }
